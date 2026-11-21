@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera | Creative Developer & Designer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            950: '#050810',
+                            900: '#0a0f1d',
+                            800: '#111827',
+                            700: '#1e293b',
+                        },
+                        brand: {
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            glow: 'rgba(59, 130, 246, 0.35)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Subtle Animations & Glassmorphism */
+        body {
+            background-color: #050810;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(5, 8, 16, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.7), rgba(10, 15, 29, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.25);
+        }
+
+        .hero-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.18) 0%, rgba(5, 8, 16, 0) 70%);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- ================= NAVIGATION BAR ================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-blue-700 flex items-center justify-center text-white font-display font-bold text-xl shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+                        A
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight text-white">Alex<span class="text-brand-500">.dev</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors">About</a>
+                    <a href="#services" class="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors">Services</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors">Projects</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold shadow-lg shadow-brand-600/30 transition-all hover:scale-105">
+                        Hire Me
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-3 rounded-xl bg-dark-800 text-slate-200 hover:text-brand-400 border border-slate-800 focus:outline-none">
+                    <i class="fas fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-900/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-dark-800 hover:text-brand-400">Home</a>
+            <a href="#about" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-dark-800 hover:text-brand-400">About</a>
+            <a href="#services" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-dark-800 hover:text-brand-400">Services</a>
+            <a href="#skills" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-dark-800 hover:text-brand-400">Skills</a>
+            <a href="#projects" class="mobile-link block px-4 py-3 rounded-xl text-base font-medium text-slate-200 hover:bg-dark-800 hover:text-brand-400">Projects</a>
+            <a href="#contact" class="mobile-link block px-4 py-3 mt-2 rounded-xl text-center text-base font-semibold bg-brand-600 text-white hover:bg-brand-500">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Ambient Background Glow -->
+        <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+        <div class="absolute top-24 right-10 w-72 h-72 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-medium mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                    <span>Available for Freelance & Full-Time Roles</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                    Building Digital Experiences That <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-600">Inspire & Perform</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-10 max-w-2xl mx-auto">
+                    Hi, I'm <strong class="text-slate-200">Alex Rivera</strong> — a Full-Stack Web Developer & UI/UX Designer specializing in crafting fast, scalable, and visually stunning web applications.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-600/30 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <span>View My Work</span>
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-dark-800 hover:bg-dark-700 text-slate-200 font-semibold border border-slate-700/80 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="far fa-envelope"></i>
+                        <span>Let's Talk</span>
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-12 flex items-center justify-center space-x-6 text-slate-400">
+                    <a href="#" aria-label="GitHub" class="p-2 hover:text-brand-400 transition-colors text-xl"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn" class="p-2 hover:text-brand-400 transition-colors text-xl"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter" class="p-2 hover:text-brand-400 transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Dribbble" class="p-2 hover:text-brand-400 transition-colors text-xl"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ME SECTION ================= -->
+    <section id="about" class="py-20 bg-dark-900/50 border-y border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Image Column -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-sm">
+                        <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-brand-600 to-cyan-500 opacity-25 blur-lg"></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
+                            onerror="this.src='https://placehold.co/600x700/0a0f1d/3b82f6?text=Alex+Rivera'"
+                            alt="Alex Rivera Portrait" 
+                            class="relative rounded-2xl w-full h-auto object-cover border border-slate-700/60 shadow-2xl"
+                        >
+                        <!-- Floating Experience Badge -->
+                        <div class="absolute -bottom-5 -right-4 sm:right-4 bg-dark-800 border border-brand-500/30 px-5 py-3 rounded-2xl shadow-xl">
+                            <p class="text-2xl font-display font-bold text-brand-400">5+ Years</p>
+                            <p class="text-xs text-slate-400">Industry Experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Column -->
+                <div class="lg:col-span-7">
+                    <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">About Me</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-6">
+                        Passionate About Clean Code & Modern Interface Design
+                    </h2>
+                    <p class="text-slate-400 leading-relaxed mb-4">
+                        I am a dedicated developer based in San Francisco with a passion for transforming complex problems into intuitive, user-friendly digital solutions. My journey started with a curiosity for how websites work, evolving into a full-fledged career building modern web platforms.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Whether working with startups or established enterprises, I focus on performance, accessibility, and clean architecture to ensure every project stands out.
+                    </p>
+
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="p-4 rounded-2xl bg-dark-800/80 border border-slate-800">
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">45+</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-1">Projects Completed</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-dark-800/80 border border-slate-800">
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">30+</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-1">Happy Clients</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-dark-800/80 border border-slate-800">
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">99%</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-1">Client Satisfaction</p>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center space-x-2 text-brand-400 hover:text-brand-300 font-semibold group">
+                        <span>Download Resume / CV</span>
+                        <i class="fas fa-download transform group-hover:translate-y-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES SECTION (STEP 3) ================= -->
+    <section id="services" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">What I Offer</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">My Services</h2>
+                <p class="text-slate-400">Tailored digital solutions designed to elevate your brand and accelerate business growth.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="glass-card rounded-2xl p-8 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Web Development</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Custom, responsive, and high-performance websites built using modern frameworks like React, Next.js, and Tailwind CSS.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center text-sm font-semibold text-brand-400 group-hover:text-brand-300">
+                        <span>Discuss Project</span>
+                        <i class="fas fa-chevron-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="glass-card rounded-2xl p-8 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">UI/UX Product Design</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        User-centric wireframes, interactive prototypes, and clean design systems that maximize engagement and usability.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center text-sm font-semibold text-brand-400 group-hover:text-brand-300">
+                        <span>Discuss Project</span>
+                        <i class="fas fa-chevron-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="glass-card rounded-2xl p-8 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">SEO & Speed Optimization</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Technical SEO audits, Core Web Vitals tuning, and performance optimization to help your site rank higher and load faster.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center text-sm font-semibold text-brand-400 group-hover:text-brand-300">
+                        <span>Discuss Project</span>
+                        <i class="fas fa-chevron-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SKILLS SECTION ================= -->
+    <section id="skills" class="py-20 bg-dark-900/50 border-y border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Tech Stack</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">Skills & Expertise</h2>
+                <p class="text-slate-400">Technologies and tools I use to bring ideas to life.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                <!-- Skill Items -->
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-html5 text-3xl text-orange-500"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">HTML5 & CSS3</h4>
+                        <p class="text-xs text-slate-400">Semantic & Responsive</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-js text-3xl text-yellow-400"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">JavaScript (ES6+)</h4>
+                        <p class="text-xs text-slate-400">Modern Async JS</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-react text-3xl text-brand-400"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">React & Next.js</h4>
+                        <p class="text-xs text-slate-400">Frontend Architecture</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fas fa-wind text-3xl text-cyan-400"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">Tailwind CSS</h4>
+                        <p class="text-xs text-slate-400">Rapid UI Styling</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-node-js text-3xl text-green-500"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">Node.js</h4>
+                        <p class="text-xs text-slate-400">REST APIs & Backend</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fas fa-database text-3xl text-blue-400"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">PostgreSQL & Mongo</h4>
+                        <p class="text-xs text-slate-400">Database Design</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-figma text-3xl text-purple-400"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">Figma</h4>
+                        <p class="text-xs text-slate-400">UI/UX Prototyping</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5 flex items-center space-x-4">
+                    <i class="fab fa-git-alt text-3xl text-red-500"></i>
+                    <div>
+                        <h4 class="font-semibold text-white">Git & GitHub</h4>
+                        <p class="text-xs text-slate-400">Version Control</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROJECTS SECTION ================= -->
+    <section id="projects" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                <div>
+                    <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Portfolio</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2">Featured Projects</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm sm:text-base">
+                    A selection of recent projects showcasing my expertise in web engineering and modern UI design.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <article class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img 
+                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/111827/3b82f6?text=FinTech+Dashboard'"
+                            alt="FinTech Analytics Dashboard" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-dark-950/80 text-brand-400 border border-brand-500/30">
+                            Web App
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-xl font-bold text-white mb-2">NovaPay Analytics</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+                            Real-time financial analytics platform with interactive charts, dark mode UI, and automated reporting.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">React</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Tailwind</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Chart.js</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+                            <a href="#" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1.5">
+                                <span>Live Demo</span>
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Source Code">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img 
+                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/111827/3b82f6?text=E-Commerce+Platform'"
+                            alt="Modern E-Commerce Store" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-dark-950/80 text-brand-400 border border-brand-500/30">
+                            E-Commerce
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-xl font-bold text-white mb-2">Lumina Tech Store</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+                            High-converting minimalist electronics store featuring instant search, cart drawer, and Stripe checkout.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Next.js</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">TypeScript</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Stripe</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+                            <a href="#" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1.5">
+                                <span>Live Demo</span>
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Source Code">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img 
+                            src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/111827/3b82f6?text=AI+Task+Manager'"
+                            alt="AI Productivity Workspace" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium bg-dark-950/80 text-brand-400 border border-brand-500/30">
+                            SaaS UI
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="font-display text-xl font-bold text-white mb-2">FlowState Workspace</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+                            Collaborative project management tool with drag-and-drop Kanban boards and AI task prioritization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">React</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Node.js</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-dark-800 text-slate-300">Tailwind</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-800">
+                            <a href="#" class="text-sm font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1.5">
+                                <span>Live Demo</span>
+                                <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors" aria-label="Source Code">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section id="contact" class="py-24 bg-dark-900/50 border-t border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Contact Info -->
+                <div class="lg:col-span-5">
+                    <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+                        Let's Build Something Great Together
+                    </h2>
+                    <p class="text-slate-400 leading-relaxed mb-8">
+                        Have a project in mind or want to discuss potential opportunities? Fill out the form and I'll get back to you within 24 hours.
+                    </p>
+
+                    <div class="space-y-5">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Email Me</p>
+                                <p class="text-white font-medium">hello@alexrivera.dev</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Location</p>
+                                <p class="text-white font-medium">San Francisco, CA (Remote Worldwide)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Your Name</label>
+                                <input type="text" id="name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                                <input type="email" id="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-slate-300 mb-2">Subject</label>
+                            <input type="text" id="subject" required placeholder="Web Development Inquiry" class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                            <textarea id="message" rows="4" required placeholder="Tell me about your project goals and timeline..." class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold shadow-lg shadow-brand-600/30 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+
+                        <!-- Custom Confirmation Toast / Message Box -->
+                        <div id="form-feedback" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm text-center">
+                            <i class="fas fa-check-circle mr-2"></i> Thank you! Your message has been sent successfully.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="py-8 border-t border-slate-800/80 text-center text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; <span id="year"></span> Alex Rivera. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#home" class="hover:text-brand-400 transition-colors">Home</a>
+                <a href="#services" class="hover:text-brand-400 transition-colors">Services</a>
+                <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= INTERACTIVE JAVASCRIPT ================= -->
+    <script>
+        // Set Current Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Scroll Reveal Animation using IntersectionObserver
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Contact Form Submission Handler (No alert() used)
+        const contactForm = document.getElementById('contact-form');
+        const formFeedback = document.getElementById('form-feedback');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formFeedback.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                formFeedback.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
